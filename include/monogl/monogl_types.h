@@ -24,9 +24,4 @@
 #define MONOGL_API
 #endif
 
-/**
- * @brief Describes information about dimensions
- */
-typedef struct monogl_surface_info_t monogl_surface_info_t;
-
 #endif // YET_ANOTHER_GAUGE__MONOGL__TYPES_H
