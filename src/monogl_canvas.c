@@ -62,8 +62,9 @@ void monogl_canvas_clear(monogl_canvas_t *canvas) {
 
 void monogl_canvas_draw_point(monogl_canvas_t *canvas, uint8_t x, uint8_t y) {
   uint8_t width = canvas->width;
+  uint8_t height = canvas->height;
   uint8_t *base_ptr = (uint8_t *) canvas->pixels;
 
-  uint8_t *ptr = base_ptr + width * (7u - y / 8u) + x;
+  uint8_t *ptr = base_ptr + width * (height / 8u - y / 8u - 1u) + x;
   *ptr |= (1u << (7u - y % 8u));
 }
