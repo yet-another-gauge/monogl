@@ -20,8 +20,15 @@
 #ifndef YET_ANOTHER_GAUGE__MONOGL__TYPES_H
 #define YET_ANOTHER_GAUGE__MONOGL__TYPES_H
 
+#include <stddef.h>
+
 #ifndef MONOGL_API
 #define MONOGL_API
 #endif
+
+/**
+ * @brief Provides an interface for drawing
+ */
+typedef struct monogl_canvas_t monogl_canvas_t;
 
 #endif // YET_ANOTHER_GAUGE__MONOGL__TYPES_H
