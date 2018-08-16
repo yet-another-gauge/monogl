@@ -61,4 +61,14 @@ MONOGL_API void monogl_canvas_clear(monogl_canvas_t *const);
  */
 MONOGL_API void monogl_canvas_draw_point(monogl_canvas_t *const, uint8_t x, uint8_t y);
 
+/**
+ * @brief Draw the specified rectangle
+ * @param [in,out] canvas
+ * @param [in] x1
+ * @param [in] y1
+ * @param [in] x2
+ * @param [in] y2
+ */
+MONOGL_API void monogl_canvas_draw_rect(monogl_canvas_t *const, uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+
 #endif // YET_ANOTHER_GAUGE__MONOGL__CANVAS_H
