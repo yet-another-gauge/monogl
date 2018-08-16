@@ -44,7 +44,7 @@ void monogl_canvas_delete(monogl_canvas_t *canvas) {
   }
 }
 
-void monogl_canvas_clear(monogl_canvas_t *canvas) {
+void monogl_canvas_clear(monogl_canvas_t *const canvas) {
   uint8_t width = canvas->width;
   uint8_t height = canvas->height;
   uint8_t *base_ptr = (uint8_t *) canvas->pixels;
@@ -60,11 +60,19 @@ void monogl_canvas_clear(monogl_canvas_t *canvas) {
   }
 }
 
-void monogl_canvas_draw_point(monogl_canvas_t *canvas, uint8_t x, uint8_t y) {
+void monogl_canvas_draw_point(monogl_canvas_t *const canvas, uint8_t x, uint8_t y) {
   uint8_t width = canvas->width;
   uint8_t height = canvas->height;
   uint8_t *base_ptr = (uint8_t *) canvas->pixels;
 
   uint8_t *ptr = base_ptr + width * (height / 8u - y / 8u - 1u) + x;
   *ptr |= (1u << (7u - y % 8u));
+}
+
+void monogl_canvas_draw_rect(monogl_canvas_t *const canvas, uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2) {
+  for (uint8_t i = x1; i <= x2; ++i) {
+    for (uint8_t j = y1; j <= y2; ++j) {
+      monogl_canvas_draw_point(canvas, i, j);
+    }
+  }
 }
