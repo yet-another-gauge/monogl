@@ -20,18 +20,17 @@
 #ifndef YET_ANOTHER_GAUGE__MONOGL__CANVAS_H
 #define YET_ANOTHER_GAUGE__MONOGL__CANVAS_H
 
-#include <stddef.h>
-
 #include "monogl_types.h"
 
 /**
  * @brief Allocate a struct monogl_canvas_t, intended to be used as a canvas
  * @param [in] width
  * @param [in] height
- * @param [in] pixels Pointer to pixels buffer (must outlast this canvas)
+ * @param [in] points Pointer to points buffer (must outlast this canvas)
+ * @param [in] byte_size
  * @return Created monogl_canvas_t
  */
-MONOGL_API monogl_canvas_t *monogl_canvas_new(uint8_t width, uint8_t height, void *const pixels);
+MONOGL_API monogl_canvas_t *monogl_canvas_new(uint16_t width, uint16_t height, void *const points, size_t byte_size);
 
 /**
  * @brief Free the memory for the given monogl_canvas_t
@@ -45,21 +44,22 @@ MONOGL_API void monogl_canvas_delete(monogl_canvas_t *);
  * @param [in] dx Distance to translate in x
  * @param [in] dy Distance to translate in y
  */
-MONOGL_API void monogl_canvas_translate(monogl_canvas_t *const, uint8_t dx, uint8_t dy);
+MONOGL_API void monogl_canvas_translate(const monogl_canvas_t *const, uint16_t dx, uint16_t dy);
 
 /**
- * @brief Clear given canvas
+ * @brief Clear the given canvas
  * @param [in,out] canvas
  */
-MONOGL_API void monogl_canvas_clear(monogl_canvas_t *const);
+MONOGL_API void monogl_canvas_clear(const monogl_canvas_t *const);
 
 /**
- * @brief Draw point at (x, y)
+ * @brief Draw the specified point
  * @param [in,out] canvas
  * @param [in] x
  * @param [in] y
+ * @param [in] color
  */
-MONOGL_API void monogl_canvas_draw_point(monogl_canvas_t *const, uint8_t x, uint8_t y);
+MONOGL_API void monogl_canvas_draw_point(const monogl_canvas_t *const, uint16_t x, uint16_t y, monogl_color_t color);
 
 /**
  * @brief Draw the specified rectangle
@@ -69,6 +69,22 @@ MONOGL_API void monogl_canvas_draw_point(monogl_canvas_t *const, uint8_t x, uint
  * @param [in] x2
  * @param [in] y2
  */
-MONOGL_API void monogl_canvas_draw_rect(monogl_canvas_t *const, uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+MONOGL_API void monogl_canvas_draw_rect(const monogl_canvas_t *const,
+                                        uint16_t x1,
+                                        uint16_t y1,
+                                        uint16_t x2,
+                                        uint16_t y2);
+
+/**
+ * @brief Draw the specified image with it's top-left corner at (x,y)
+ * @param [in,out] canvas
+ * @param [in] x
+ * @param [in] y
+ * @param [in] image
+ */
+MONOGL_API void monogl_canvas_draw_image(const monogl_canvas_t *const,
+                                         uint16_t x,
+                                         uint16_t y,
+                                         const monogl_image_t *const);
 
 #endif // YET_ANOTHER_GAUGE__MONOGL__CANVAS_H

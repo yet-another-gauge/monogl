@@ -18,20 +18,24 @@
  */
 
 #include <stdlib.h>
-#include <stdint.h>
 
+#include "monogl/monogl_image.h"
 #include "monogl/monogl_canvas.h"
 
 struct monogl_canvas_t {
-  void *pixels;
-  uint8_t width;
-  uint8_t height;
+  void *points;
+  size_t byte_size;
+
+  uint16_t width;
+  uint16_t height;
 };
 
-monogl_canvas_t *monogl_canvas_new(uint8_t width, uint8_t height, void *const pixels) {
+monogl_canvas_t *monogl_canvas_new(uint16_t width, uint16_t height, void *const points, size_t byte_size) {
   monogl_canvas_t *canvas = malloc(sizeof(monogl_canvas_t));
 
-  canvas->pixels = pixels;
+  canvas->points = points;
+  canvas->byte_size = byte_size;
+
   canvas->width = width;
   canvas->height = height;
 
@@ -44,35 +48,69 @@ void monogl_canvas_delete(monogl_canvas_t *canvas) {
   }
 }
 
-void monogl_canvas_clear(monogl_canvas_t *const canvas) {
-  uint8_t width = canvas->width;
-  uint8_t height = canvas->height;
-  uint8_t *base_ptr = (uint8_t *) canvas->pixels;
+void monogl_canvas_clear(const monogl_canvas_t *const canvas) {
+  uint8_t *base_ptr = (uint8_t *) canvas->points;
+  size_t byte_size = canvas->byte_size;
 
-  size_t size = width * height / 8u;
-
-  uint8_t *left_ptr = base_ptr;
-  uint8_t *right_ptr = base_ptr + size;
-
-  while (left_ptr < right_ptr) {
-    *left_ptr = 0x00;
-    left_ptr += 1;
+  for (uint8_t *ptr = base_ptr; ptr < base_ptr + byte_size; ++ptr) {
+    *ptr = 0x00u;
   }
 }
 
-void monogl_canvas_draw_point(monogl_canvas_t *const canvas, uint8_t x, uint8_t y) {
-  uint8_t width = canvas->width;
-  uint8_t height = canvas->height;
-  uint8_t *base_ptr = (uint8_t *) canvas->pixels;
+void monogl_canvas_draw_point(const monogl_canvas_t *const canvas, uint16_t x, uint16_t y, monogl_color_t color) {
+  uint16_t width = canvas->width;
+  uint16_t height = canvas->height;
 
-  uint8_t *ptr = base_ptr + width * (height / 8u - y / 8u - 1u) + x;
-  *ptr |= (1u << (7u - y % 8u));
+  if (x >= width || y >= height) {
+    return;
+  }
+
+  uint8_t *base_ptr = (uint8_t *) canvas->points;
+
+  uint32_t offset = y * width + x;
+
+  uint8_t *ptr = base_ptr + offset / 8u;
+
+  switch (color) {
+    case MONOGL_COLOR_BLACK: {
+      *ptr |= 1u << (uint8_t) (7u - (offset & 7u));
+      break;
+    }
+    case MONOGL_COLOR_WHITE: {
+      *ptr &= ~(1u << (uint8_t) (7u - (offset & 7u)));
+      break;
+    }
+  }
 }
 
-void monogl_canvas_draw_rect(monogl_canvas_t *const canvas, uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2) {
-  for (uint8_t i = x1; i <= x2; ++i) {
-    for (uint8_t j = y1; j <= y2; ++j) {
-      monogl_canvas_draw_point(canvas, i, j);
+void monogl_canvas_draw_rect(const monogl_canvas_t *const canvas, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2) {
+  for (uint16_t i = x1; i <= x2; ++i) {
+    for (uint16_t j = y1; j <= y2; ++j) {
+      monogl_canvas_draw_point(canvas, i, j, MONOGL_COLOR_BLACK);
+    }
+  }
+}
+
+void monogl_canvas_draw_image(const monogl_canvas_t *const canvas,
+                              uint16_t x,
+                              uint16_t y,
+                              const monogl_image_t *const image) {
+  const uint8_t *image_base_ptr = monogl_image_get_points(image);
+
+  uint16_t image_width = monogl_image_get_width(image);
+  uint16_t image_height = monogl_image_get_height(image);
+
+  size_t image_byte_width = (image_width + 7u) / 8u;
+
+  for (uint16_t i = 0; i < image_width; ++i) {
+    for (uint16_t j = 0; j < image_height; ++j) {
+      monogl_color_t color = MONOGL_COLOR_WHITE;
+
+      if (*(image_base_ptr + j * image_byte_width + i / 8u) & (0b10000000u >> (i & 7u))) {
+        color = MONOGL_COLOR_BLACK;
+      }
+
+      monogl_canvas_draw_point(canvas, x + i, y + j, color);
     }
   }
 }
