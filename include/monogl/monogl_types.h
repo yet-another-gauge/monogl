@@ -27,6 +27,13 @@
 #define MONOGL_API
 #endif
 
+typedef enum {
+  /** white color */
+      MONOGL_COLOR_WHITE = 0,
+  /** black color */
+      MONOGL_COLOR_BLACK = 1,
+} monogl_color_t;
+
 /**
  * @brief Describes a two dimensional array of pixels to draw
  */
