@@ -35,7 +35,7 @@ typedef enum {
 } monogl_color_t;
 
 /**
- * @brief Describes a two dimensional array of pixels to draw
+ * @brief Describes a two dimensional array of points/pixels to draw
  */
 typedef struct monogl_image_t monogl_image_t;
 

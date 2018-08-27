@@ -26,7 +26,7 @@
  * @brief Allocate a struct monogl_image_t, intended to be used as an image
  * @param [in] width
  * @param [in] height
- * @param [in] points Pointer to points buffer (must outlast this image)
+ * @param [in] points Pointer to points/pixels buffer (must outlast this image)
  * @return Created monogl_image_t
  */
 MONOGL_API monogl_image_t *monogl_image_new(uint16_t width, uint16_t height, void const *const points);
@@ -38,21 +38,21 @@ MONOGL_API monogl_image_t *monogl_image_new(uint16_t width, uint16_t height, voi
 MONOGL_API void monogl_image_delete(monogl_image_t *);
 
 /**
- * @brief Returns the number of points in each row
+ * @brief Return the number of points/pixels in each row
  * @param [in] image
  * @return The number of points in each row
  */
 MONOGL_API uint16_t monogl_image_get_width(const monogl_image_t *const);
 
 /**
- * @brief Returns the number of rows
+ * @brief Return the number of rows
  * @param [in] image
  * @return The number of rows
  */
 MONOGL_API uint16_t monogl_image_get_height(const monogl_image_t *const);
 
 /**
- * @brief Return pointer to points buffer
+ * @brief Return pointer to points/pixels buffer
  * @param [in] image
  * @return Pointer to points buffer
  */
