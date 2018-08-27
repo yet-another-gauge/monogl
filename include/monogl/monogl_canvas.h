@@ -26,7 +26,7 @@
  * @brief Allocate a struct monogl_canvas_t, intended to be used as a canvas
  * @param [in] width
  * @param [in] height
- * @param [in] points Pointer to points buffer (must outlast this canvas)
+ * @param [in] points Pointer to points/pixels buffer (must outlast this canvas)
  * @param [in] byte_size
  * @return Created monogl_canvas_t
  */
