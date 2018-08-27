@@ -17,24 +17,41 @@
  * along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef YET_ANOTHER_GAUGE__MONOGL__TYPES_H
-#define YET_ANOTHER_GAUGE__MONOGL__TYPES_H
+#include <stdlib.h>
 
-#include <stdio.h>
-#include <stddef.h>
+#include "monogl/monogl_image.h"
 
-#ifndef MONOGL_API
-#define MONOGL_API
-#endif
+struct monogl_image_t {
+  void const *points;
 
-/**
- * @brief Describes a two dimensional array of pixels to draw
- */
-typedef struct monogl_image_t monogl_image_t;
+  uint16_t width;
+  uint16_t height;
+};
 
-/**
- * @brief Provides an interface for drawing
- */
-typedef struct monogl_canvas_t monogl_canvas_t;
+monogl_image_t *monogl_image_new(uint16_t width, uint16_t height, void const *const points) {
+  monogl_image_t *image = malloc(sizeof(monogl_image_t));
 
-#endif // YET_ANOTHER_GAUGE__MONOGL__TYPES_H
+  image->points = points;
+  image->width = width;
+  image->height = height;
+
+  return image;
+}
+
+void monogl_image_delete(monogl_image_t *image) {
+  if (image != NULL) {
+    free(image);
+  }
+}
+
+uint16_t monogl_image_get_width(const monogl_image_t *const image) {
+  return image->width;
+}
+
+uint16_t monogl_image_get_height(const monogl_image_t *const image) {
+  return image->height;
+}
+
+void const *monogl_image_get_points(const monogl_image_t *const image) {
+  return image->points;
+}
