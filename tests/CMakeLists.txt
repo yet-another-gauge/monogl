@@ -9,8 +9,7 @@ set(CMAKE_C_FLAGS "-v ${CMAKE_C_FLAGS}")
 set(MONOGL_TEST_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(MONOGL_TEST_SOURCES
-        # todo
-        )
+        ${MONOGL_TEST_SOURCE_DIR}/check_monogl_image)
 
 add_executable(check_monogl
         ${MONOGL_TEST_SOURCES}
