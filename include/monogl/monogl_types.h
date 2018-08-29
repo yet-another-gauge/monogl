@@ -21,6 +21,7 @@
 #define YET_ANOTHER_GAUGE__MONOGL__TYPES_H
 
 #include <stdio.h>
+#include <stdint.h>
 #include <stddef.h>
 
 #ifndef MONOGL_API
