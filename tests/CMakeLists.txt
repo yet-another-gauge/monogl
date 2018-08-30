@@ -15,29 +15,21 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-project(monogl C)
+include(CTest)
 
-cmake_minimum_required(VERSION 3.0.2)
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_COMPILER cc)
+set(CMAKE_C_FLAGS "-v ${CMAKE_C_FLAGS}")
 
-option(BUILD_UNIT_TESTS "Build unit tests" OFF)
-MESSAGE(STATUS "Build unit tests: ${BUILD_UNIT_TESTS}")
+set(TEST_SOURCES
+        # todo
+        )
 
-set(MONOGL_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-set(MONOGL_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+add_executable(test_monogl
+        ${TEST_SOURCES}
+        $<TARGET_OBJECTS:monogl>)
 
-set(MONOGL_SOURCE_FILES
-        ${MONOGL_SOURCE_DIR}/monogl_image.c
-        ${MONOGL_SOURCE_DIR}/monogl_canvas.c)
+target_link_libraries(test_monogl PRIVATE
+        unity)
 
-add_library(monogl OBJECT
-        ${MONOGL_SOURCE_FILES})
-
-target_include_directories(monogl PUBLIC
-        ${MONOGL_INCLUDE_DIR})
-
-add_subdirectory(external)
-
-if (BUILD_UNIT_TESTS)
-    enable_testing()
-    add_subdirectory(tests)
-endif ()
+add_test(NAME test_monogl COMMAND test_monogl)
