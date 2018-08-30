@@ -22,8 +22,7 @@ set(CMAKE_C_COMPILER cc)
 set(CMAKE_C_FLAGS "-v ${CMAKE_C_FLAGS}")
 
 set(TEST_SOURCES
-        # todo
-        )
+        test_monogl_image.c)
 
 add_executable(test_monogl
         ${TEST_SOURCES}
