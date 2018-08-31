@@ -272,3 +272,11 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Yet another gauge (build by hand)
+build/
+
+# Yet another gauge (continuous untegration)
+ci-build-debug/
+ci-build-default/
+ci-build-release/
