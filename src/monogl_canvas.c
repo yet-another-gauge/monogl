@@ -67,17 +67,28 @@ void monogl_canvas_draw_point(const monogl_canvas_t *const canvas, uint16_t x, u
 
   uint8_t *base_ptr = (uint8_t *) canvas->points;
 
+#if defined(GDDRAM)
+  uint8_t *ptr = base_ptr + x + (y / 8u) * width;
+#else
   uint32_t offset = y * width + x;
-
   uint8_t *ptr = base_ptr + offset / 8u;
+#endif
 
   switch (color) {
     case MONOGL_COLOR_BLACK: {
+#if defined(GDDRAM)
+      *ptr |= 0x01u << (y & 7u);
+#else
       *ptr |= 0x80u >> (offset & 7u);
+#endif
       break;
     }
     case MONOGL_COLOR_WHITE: {
+#if defined(GDDRAM)
+      *ptr &= ~(0x01u << (y & 7u));
+#else
       *ptr &= ~(0x80u >> (offset & 7u));
+#endif
       break;
     }
   }
