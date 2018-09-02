@@ -37,9 +37,9 @@ add_library(monogl OBJECT
 target_include_directories(monogl PUBLIC
         ${MONOGL_INCLUDE_DIR})
 
-add_subdirectory(external)
-
 if (BUILD_UNIT_TESTS)
+    add_subdirectory(external)
+
     enable_testing()
     add_subdirectory(tests)
 endif ()
