@@ -34,6 +34,7 @@ void test_monogl_image_new(void) {
   TEST_ASSERT_NOT_NULL(image);
   TEST_ASSERT_NOT_NULL(points);
 
+  free(points);
   monogl_image_delete(image);
 }
 
@@ -49,6 +50,8 @@ void test_monogl_image_delete(void) {
   monogl_image_delete(image);
 
   TEST_ASSERT_NOT_NULL(points);
+
+  free(points);
 }
 
 void test_monogl_image_get_width(void) {
@@ -62,6 +65,7 @@ void test_monogl_image_get_width(void) {
 
   TEST_ASSERT_EQUAL_UINT16(width, monogl_image_get_width(image));
 
+  free(points);
   monogl_image_delete(image);
 }
 
@@ -76,6 +80,7 @@ void test_monogl_image_get_height(void) {
 
   TEST_ASSERT_EQUAL_UINT16(height, monogl_image_get_height(image));
 
+  free(points);
   monogl_image_delete(image);
 }
 
@@ -90,17 +95,6 @@ void test_monogl_image_get_points(void) {
 
   TEST_ASSERT_EQUAL_MEMORY(points, monogl_image_get_points(image), byte_size);
 
+  free(points);
   monogl_image_delete(image);
-}
-
-int main(void) {
-  UNITY_BEGIN();
-
-  RUN_TEST(test_monogl_image_new);
-  RUN_TEST(test_monogl_image_delete);
-  RUN_TEST(test_monogl_image_get_width);
-  RUN_TEST(test_monogl_image_get_height);
-  RUN_TEST(test_monogl_image_get_points);
-
-  return UNITY_END();
 }
