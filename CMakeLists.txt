@@ -19,6 +19,8 @@ project(monogl C)
 
 cmake_minimum_required(VERSION 3.0.2)
 
+set(CMAKE_C_STANDARD 99)
+
 option(BUILD_UNIT_TESTS "Build unit tests" OFF)
 MESSAGE(STATUS "Build unit tests: ${BUILD_UNIT_TESTS}")
 
