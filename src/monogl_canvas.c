@@ -73,12 +73,10 @@ void monogl_canvas_draw_point(const monogl_canvas_t *const canvas, uint16_t x, u
 
   switch (color) {
     case MONOGL_COLOR_BLACK: {
-//      *ptr |= 1u << (uint8_t) (7u - (offset & 7u));
       *ptr |= 0x80u >> (offset & 7u);
       break;
     }
     case MONOGL_COLOR_WHITE: {
-//      *ptr &= ~(1u << (uint8_t) (7u - (offset & 7u)));
       *ptr &= ~(0x80u >> (offset & 7u));
       break;
     }
@@ -102,13 +100,13 @@ void monogl_canvas_draw_image(const monogl_canvas_t *const canvas,
   uint16_t image_width = monogl_image_get_width(image);
   uint16_t image_height = monogl_image_get_height(image);
 
-  size_t image_byte_width = (image_width + 7u) / 8u;
-
   for (uint16_t i = 0; i < image_width; ++i) {
     for (uint16_t j = 0; j < image_height; ++j) {
+      uint32_t offset = j * image_width + i;
+
       monogl_color_t color = MONOGL_COLOR_WHITE;
 
-      if (*(image_base_ptr + j * image_byte_width + i / 8u) & (0x80u >> (i & 7u))) {
+      if (*(image_base_ptr + offset / 8u) & (0x80u >> (offset & 7u))) {
         color = MONOGL_COLOR_BLACK;
       }
 
