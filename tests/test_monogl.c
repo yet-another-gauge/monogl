@@ -32,6 +32,11 @@ void test_monogl_canvas_draw_dot(void);
 void test_monogl_canvas_draw_rect(void);
 void test_monogl_canvas_draw_image(void);
 
+void test_monogl_surface_new(void);
+void test_monogl_surface_delete(void);
+void test_monogl_surface_get_canvas(void);
+void test_monogl_surface_get_dots(void);
+
 int main(void) {
   UNITY_BEGIN();
 
@@ -47,6 +52,11 @@ int main(void) {
   RUN_TEST(test_monogl_canvas_draw_dot);
   RUN_TEST(test_monogl_canvas_draw_rect);
   RUN_TEST(test_monogl_canvas_draw_image);
+
+  RUN_TEST(test_monogl_surface_new);
+  RUN_TEST(test_monogl_surface_delete);
+  RUN_TEST(test_monogl_surface_get_canvas);
+  RUN_TEST(test_monogl_surface_get_dots);
 
   return UNITY_END();
 }
