@@ -27,14 +27,14 @@ void test_monogl_image_new(void) {
   uint16_t height = 64;
 
   size_t byte_size = (width * height + 7u) / 8u;
-  uint8_t *points = malloc(byte_size);
+  uint8_t *dots = malloc(byte_size);
 
-  monogl_image_t *image = monogl_image_new(width, height, points);
+  monogl_image_t *image = monogl_image_new(width, height, dots);
 
   TEST_ASSERT_NOT_NULL(image);
-  TEST_ASSERT_NOT_NULL(points);
+  TEST_ASSERT_NOT_NULL(dots);
 
-  free(points);
+  free(dots);
   monogl_image_delete(image);
 }
 
@@ -43,15 +43,15 @@ void test_monogl_image_delete(void) {
   uint16_t height = 64;
 
   size_t byte_size = (width * height + 7u) / 8u;
-  uint8_t *points = malloc(byte_size);
+  uint8_t *dots = malloc(byte_size);
 
-  monogl_image_t *image = monogl_image_new(width, height, points);
+  monogl_image_t *image = monogl_image_new(width, height, dots);
 
   monogl_image_delete(image);
 
-  TEST_ASSERT_NOT_NULL(points);
+  TEST_ASSERT_NOT_NULL(dots);
 
-  free(points);
+  free(dots);
 }
 
 void test_monogl_image_get_width(void) {
@@ -59,13 +59,13 @@ void test_monogl_image_get_width(void) {
   uint16_t height = 64;
 
   size_t byte_size = (width * height + 7u) / 8u;
-  uint8_t *points = malloc(byte_size);
+  uint8_t *dots = malloc(byte_size);
 
-  monogl_image_t *image = monogl_image_new(width, height, points);
+  monogl_image_t *image = monogl_image_new(width, height, dots);
 
   TEST_ASSERT_EQUAL_UINT16(width, monogl_image_get_width(image));
 
-  free(points);
+  free(dots);
   monogl_image_delete(image);
 }
 
@@ -74,27 +74,27 @@ void test_monogl_image_get_height(void) {
   uint16_t height = 64;
 
   size_t byte_size = (width * height + 7u) / 8u;
-  uint8_t *points = malloc(byte_size);
+  uint8_t *dots = malloc(byte_size);
 
-  monogl_image_t *image = monogl_image_new(width, height, points);
+  monogl_image_t *image = monogl_image_new(width, height, dots);
 
   TEST_ASSERT_EQUAL_UINT16(height, monogl_image_get_height(image));
 
-  free(points);
+  free(dots);
   monogl_image_delete(image);
 }
 
-void test_monogl_image_get_points(void) {
+void test_monogl_image_get_dots(void) {
   uint16_t width = 128;
   uint16_t height = 64;
 
   size_t byte_size = (width * height + 7u) / 8u;
-  uint8_t *points = malloc(byte_size);
+  uint8_t *dots = malloc(byte_size);
 
-  monogl_image_t *image = monogl_image_new(width, height, points);
+  monogl_image_t *image = monogl_image_new(width, height, dots);
 
-  TEST_ASSERT_EQUAL_MEMORY(points, monogl_image_get_points(image), byte_size);
+  TEST_ASSERT_EQUAL_MEMORY(dots, monogl_image_get_dots(image), byte_size);
 
-  free(points);
+  free(dots);
   monogl_image_delete(image);
 }

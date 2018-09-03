@@ -23,17 +23,17 @@
 #include "monogl/monogl_canvas.h"
 
 struct monogl_canvas_t {
-  void *points;
+  void *dots;
   size_t byte_size;
 
   uint16_t width;
   uint16_t height;
 };
 
-monogl_canvas_t *monogl_canvas_new(uint16_t width, uint16_t height, void *const points, size_t byte_size) {
+monogl_canvas_t *monogl_canvas_new(uint16_t width, uint16_t height, void *const dots, size_t byte_size) {
   monogl_canvas_t *canvas = malloc(sizeof(monogl_canvas_t));
 
-  canvas->points = points;
+  canvas->dots = dots;
   canvas->byte_size = byte_size;
 
   canvas->width = width;
@@ -49,7 +49,7 @@ void monogl_canvas_delete(monogl_canvas_t *canvas) {
 }
 
 void monogl_canvas_clear(const monogl_canvas_t *const canvas) {
-  uint8_t *base_ptr = (uint8_t *) canvas->points;
+  uint8_t *base_ptr = (uint8_t *) canvas->dots;
   size_t byte_size = canvas->byte_size;
 
   for (uint8_t *ptr = base_ptr; ptr < base_ptr + byte_size; ++ptr) {
@@ -57,7 +57,7 @@ void monogl_canvas_clear(const monogl_canvas_t *const canvas) {
   }
 }
 
-void monogl_canvas_draw_point(const monogl_canvas_t *const canvas, uint16_t x, uint16_t y, monogl_color_t color) {
+void monogl_canvas_draw_dot(const monogl_canvas_t *const canvas, uint16_t x, uint16_t y, monogl_color_t color) {
   uint16_t width = canvas->width;
   uint16_t height = canvas->height;
 
@@ -65,7 +65,7 @@ void monogl_canvas_draw_point(const monogl_canvas_t *const canvas, uint16_t x, u
     return;
   }
 
-  uint8_t *base_ptr = (uint8_t *) canvas->points;
+  uint8_t *base_ptr = (uint8_t *) canvas->dots;
 
 #if defined(GDDRAM)
   uint8_t *ptr = base_ptr + x + (y / 8u) * width;
@@ -97,7 +97,7 @@ void monogl_canvas_draw_point(const monogl_canvas_t *const canvas, uint16_t x, u
 void monogl_canvas_draw_rect(const monogl_canvas_t *const canvas, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2) {
   for (uint16_t i = x1; i <= x2; ++i) {
     for (uint16_t j = y1; j <= y2; ++j) {
-      monogl_canvas_draw_point(canvas, i, j, MONOGL_COLOR_BLACK);
+      monogl_canvas_draw_dot(canvas, i, j, MONOGL_COLOR_BLACK);
     }
   }
 }
@@ -106,7 +106,7 @@ void monogl_canvas_draw_image(const monogl_canvas_t *const canvas,
                               uint16_t x,
                               uint16_t y,
                               const monogl_image_t *const image) {
-  const uint8_t *image_base_ptr = monogl_image_get_points(image);
+  const uint8_t *image_base_ptr = monogl_image_get_dots(image);
 
   uint16_t image_width = monogl_image_get_width(image);
   uint16_t image_height = monogl_image_get_height(image);
@@ -121,7 +121,7 @@ void monogl_canvas_draw_image(const monogl_canvas_t *const canvas,
         color = MONOGL_COLOR_BLACK;
       }
 
-      monogl_canvas_draw_point(canvas, x + i, y + j, color);
+      monogl_canvas_draw_dot(canvas, x + i, y + j, color);
     }
   }
 }

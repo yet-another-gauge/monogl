@@ -26,11 +26,11 @@
  * @brief Allocate a struct monogl_canvas_t, intended to be used as a canvas
  * @param [in] width
  * @param [in] height
- * @param [in] points Pointer to points/pixels buffer (must outlast this canvas)
+ * @param [in] dots Pointer to dots buffer (must outlast this canvas)
  * @param [in] byte_size
  * @return Created monogl_canvas_t
  */
-MONOGL_API monogl_canvas_t *monogl_canvas_new(uint16_t width, uint16_t height, void *const points, size_t byte_size);
+MONOGL_API monogl_canvas_t *monogl_canvas_new(uint16_t width, uint16_t height, void *const dots, size_t byte_size);
 
 /**
  * @brief Free the memory for the given monogl_canvas_t
@@ -53,13 +53,13 @@ MONOGL_API void monogl_canvas_translate(const monogl_canvas_t *const, uint16_t d
 MONOGL_API void monogl_canvas_clear(const monogl_canvas_t *const);
 
 /**
- * @brief Draw the specified point
+ * @brief Draw the specified dot
  * @param [in,out] canvas
  * @param [in] x
  * @param [in] y
  * @param [in] color
  */
-MONOGL_API void monogl_canvas_draw_point(const monogl_canvas_t *const, uint16_t x, uint16_t y, monogl_color_t color);
+MONOGL_API void monogl_canvas_draw_dot(const monogl_canvas_t *const, uint16_t x, uint16_t y, monogl_color_t color);
 
 /**
  * @brief Draw the specified rectangle
