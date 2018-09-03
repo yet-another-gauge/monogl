@@ -23,12 +23,12 @@ void test_monogl_image_new(void);
 void test_monogl_image_delete(void);
 void test_monogl_image_get_width(void);
 void test_monogl_image_get_height(void);
-void test_monogl_image_get_points(void);
+void test_monogl_image_get_dots(void);
 
 void test_monogl_canvas_new(void);
 void test_monogl_canvas_delete(void);
 void test_monogl_canvas_clear(void);
-void test_monogl_canvas_draw_point(void);
+void test_monogl_canvas_draw_dot(void);
 void test_monogl_canvas_draw_rect(void);
 void test_monogl_canvas_draw_image(void);
 
@@ -39,12 +39,12 @@ int main(void) {
   RUN_TEST(test_monogl_image_delete);
   RUN_TEST(test_monogl_image_get_width);
   RUN_TEST(test_monogl_image_get_height);
-  RUN_TEST(test_monogl_image_get_points);
+  RUN_TEST(test_monogl_image_get_dots);
 
   RUN_TEST(test_monogl_canvas_new);
   RUN_TEST(test_monogl_canvas_delete);
   RUN_TEST(test_monogl_canvas_clear);
-  RUN_TEST(test_monogl_canvas_draw_point);
+  RUN_TEST(test_monogl_canvas_draw_dot);
   RUN_TEST(test_monogl_canvas_draw_rect);
   RUN_TEST(test_monogl_canvas_draw_image);
 

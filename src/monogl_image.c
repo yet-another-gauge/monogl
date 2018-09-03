@@ -22,16 +22,16 @@
 #include "monogl/monogl_image.h"
 
 struct monogl_image_t {
-  void const *points;
+  void const *dots;
 
   uint16_t width;
   uint16_t height;
 };
 
-monogl_image_t *monogl_image_new(uint16_t width, uint16_t height, void const *const points) {
+monogl_image_t *monogl_image_new(uint16_t width, uint16_t height, void const *const dots) {
   monogl_image_t *image = malloc(sizeof(monogl_image_t));
 
-  image->points = points;
+  image->dots = dots;
   image->width = width;
   image->height = height;
 
@@ -52,6 +52,6 @@ uint16_t monogl_image_get_height(const monogl_image_t *const image) {
   return image->height;
 }
 
-void const *monogl_image_get_points(const monogl_image_t *const image) {
-  return image->points;
+void const *monogl_image_get_dots(const monogl_image_t *const image) {
+  return image->dots;
 }
