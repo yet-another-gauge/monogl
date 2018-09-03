@@ -24,7 +24,8 @@ set(CMAKE_C_FLAGS "-v ${CMAKE_C_FLAGS}")
 set(TEST_SOURCES
         test_monogl.c
         test_monogl_image.c
-        test_monogl_canvas.c)
+        test_monogl_canvas.c
+        test_monogl_surface.c)
 
 add_executable(test_monogl
         ${TEST_SOURCES}

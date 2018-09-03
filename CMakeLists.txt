@@ -29,7 +29,8 @@ set(MONOGL_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(MONOGL_SOURCE_FILES
         ${MONOGL_SOURCE_DIR}/monogl_image.c
-        ${MONOGL_SOURCE_DIR}/monogl_canvas.c)
+        ${MONOGL_SOURCE_DIR}/monogl_canvas.c
+        ${MONOGL_SOURCE_DIR}/monogl_surface.c)
 
 add_library(monogl OBJECT
         ${MONOGL_SOURCE_FILES})

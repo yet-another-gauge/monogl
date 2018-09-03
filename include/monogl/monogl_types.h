@@ -36,7 +36,7 @@ typedef enum {
 } monogl_color_t;
 
 /**
- * @brief Describes a two dimensional array of points/pixels to draw
+ * @brief Describes a two dimensional array of dots to draw
  */
 typedef struct monogl_image_t monogl_image_t;
 
@@ -44,5 +44,10 @@ typedef struct monogl_image_t monogl_image_t;
  * @brief Provides an interface for drawing
  */
 typedef struct monogl_canvas_t monogl_canvas_t;
+
+/**
+ * @brief Responsible for managing the dots that a canvas draws into
+ */
+typedef struct monogl_surface_t monogl_surface_t;
 
 #endif // YET_ANOTHER_GAUGE__MONOGL__TYPES_H
