@@ -41,7 +41,7 @@ MONOGL_API void monogl_surface_delete(monogl_surface_t *);
  * @param [in] surface
  * @return The canvas
  */
-MONOGL_API monogl_canvas_t *monogl_surface_get_canvas(const monogl_surface_t *const);
+MONOGL_API const monogl_canvas_t *monogl_surface_get_canvas(const monogl_surface_t *const);
 
 /**
  * @brief Return pointer to dots buffer
@@ -49,5 +49,12 @@ MONOGL_API monogl_canvas_t *monogl_surface_get_canvas(const monogl_surface_t *co
  * @return Pointer to dots buffer
  */
 MONOGL_API void *monogl_surface_get_dots(const monogl_surface_t *const);
+
+/**
+ * @brief Return byte size of dots buffer
+ * @param [in] surface
+ * @return Byte size of dots buffer
+ */
+MONOGL_API size_t monogl_surface_get_byte_size(const monogl_surface_t *const);
 
 #endif // YET_ANOTHER_GAUGE__MONOGL__SURFACE_H

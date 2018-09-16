@@ -56,10 +56,14 @@ void monogl_surface_delete(monogl_surface_t *surface) {
   }
 }
 
-monogl_canvas_t *monogl_surface_get_canvas(const monogl_surface_t *const surface) {
+const monogl_canvas_t *monogl_surface_get_canvas(const monogl_surface_t *const surface) {
   return surface->canvas;
 }
 
 void *monogl_surface_get_dots(const monogl_surface_t *const surface) {
   return surface->dots;
+}
+
+size_t monogl_surface_get_byte_size(const monogl_surface_t *const surface) {
+  return surface->byte_size;
 }
