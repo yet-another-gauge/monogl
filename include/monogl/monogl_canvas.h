@@ -22,6 +22,8 @@
 
 #include "monogl_types.h"
 
+MONOGL_C_PLUS_PLUS_BEGIN_GUARD
+
 /**
  * @brief Allocate a struct monogl_canvas_t, intended to be used as a canvas
  * @param [in] width
@@ -86,5 +88,7 @@ MONOGL_API void monogl_canvas_draw_image(const monogl_canvas_t *const,
                                          uint16_t x,
                                          uint16_t y,
                                          const monogl_image_t *const);
+
+MONOGL_C_PLUS_PLUS_END_GUARD
 
 #endif // YET_ANOTHER_GAUGE__MONOGL__CANVAS_H

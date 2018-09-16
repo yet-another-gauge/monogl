@@ -22,6 +22,8 @@
 
 #include "monogl_types.h"
 
+MONOGL_C_PLUS_PLUS_BEGIN_GUARD
+
 /**
  * @brief Allocate a struct monogl_surface_t, intended to be used as a surface
  * @param [in] width Number of dots in each row
@@ -56,5 +58,7 @@ MONOGL_API void *monogl_surface_get_dots(const monogl_surface_t *const);
  * @return Byte size of dots buffer
  */
 MONOGL_API size_t monogl_surface_get_byte_size(const monogl_surface_t *const);
+
+MONOGL_C_PLUS_PLUS_END_GUARD
 
 #endif // YET_ANOTHER_GAUGE__MONOGL__SURFACE_H

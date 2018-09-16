@@ -28,6 +28,16 @@
 #define MONOGL_API
 #endif
 
+#ifdef __cplusplus
+  #define MONOGL_C_PLUS_PLUS_BEGIN_GUARD  extern "C" {
+  #define MONOGL_C_PLUS_PLUS_END_GUARD    }
+#else
+  #define MONOGL_C_PLUS_PLUS_BEGIN_GUARD
+  #define MONOGL_C_PLUS_PLUS_END_GUARD
+#endif
+
+MONOGL_C_PLUS_PLUS_BEGIN_GUARD
+
 typedef enum {
   /** white color */
       MONOGL_COLOR_WHITE = 0,
@@ -49,5 +59,7 @@ typedef struct monogl_canvas_t monogl_canvas_t;
  * @brief Responsible for managing the dots that a canvas draws into
  */
 typedef struct monogl_surface_t monogl_surface_t;
+
+MONOGL_C_PLUS_PLUS_END_GUARD
 
 #endif // YET_ANOTHER_GAUGE__MONOGL__TYPES_H

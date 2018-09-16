@@ -22,6 +22,8 @@
 
 #include "monogl_types.h"
 
+MONOGL_C_PLUS_PLUS_BEGIN_GUARD
+
 /**
  * @brief Allocate a struct monogl_image_t, intended to be used as an image
  * @param [in] width
@@ -57,5 +59,7 @@ MONOGL_API uint16_t monogl_image_get_height(const monogl_image_t *const);
  * @return Pointer to dots buffer
  */
 MONOGL_API void const *monogl_image_get_dots(const monogl_image_t *const);
+
+MONOGL_C_PLUS_PLUS_END_GUARD
 
 #endif // YET_ANOTHER_GAUGE__MONOGL__IMAGE_H
